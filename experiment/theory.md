@@ -1,4 +1,4 @@
- 1. What is an Immittance Function?
+ ### What is an Immittance Function?
 The immittance function is a general term that refers to:
 
 Impedance Function (Z(s)): The Laplace transform of the ratio of voltage to current in a linear, time-invariant (LTI) network.
