@@ -2,37 +2,33 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "This is a Sample Question 1?",
+      "question": "In an LC network, how are poles and zeros typically arranged on the s-plane?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "Randomly distributed",
+        "b": "All in the right-half plane",
+        "c": "Interlaced on the imaginary axis",
+        "d": "Located at the origin"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+     
+        "c": "In LC networks, poles and zeros are purely imaginary and interlace, ensuring oscillatory but stable behavior."
       },
-      "correctAnswer": "a",
+      "correctAnswer": "c",
       "difficulty": "beginner"
     },
     {
-      "question": "This is a Sample Question 2?",
+      "question": "Which statement about pole-zero cancellation is correct?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": " It always simplifies analysis without consequence",
+        "b": "It can hide unstable system modes",
+        "c": "It is always a desired condition in control systems",
+        "d": "It removes zeros from the frequency response"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        
+        "b": "Pole-zero cancellation may eliminate unstable modes mathematically, but not physically — they may still affect system behavior."
       },
-      "correctAnswer": "c",
+      "correctAnswer": "b",
       "difficulty": "beginner"
     }
   ]

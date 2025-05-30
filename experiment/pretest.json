@@ -2,35 +2,31 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "This is a Sample Question 1?",
+      "question": "What condition must be satisfied for an immittance function to represent a passive physical system?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "Must have all poles in the right-half s-plan",
+        "b": "Must be a non-rational function",
+        "c": "Must be a positive real function",
+        "d": "Must have more zeros than poles"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        
+        "c": "Passive systems require positive real functions, ensuring passivity, stability, and realizability."
       },
-      "correctAnswer": "a",
+      "correctAnswer": "c",
       "difficulty": "beginner"
     },
     {
-      "question": "This is a Sample Question 2?",
+      "question": "The number of poles and zeroes of a rational immittance function is determined by",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "The degree of the numerator only",
+        "b": "The degree of the denominator only",
+        "c": "The degrees of both numerator and denominator",
+        "d": "The number of energy storage elements only"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        
+        "c": "The degrees of both numerator and denominator"
       },
       "correctAnswer": "c",
       "difficulty": "beginner"

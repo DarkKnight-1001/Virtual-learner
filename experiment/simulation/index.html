@@ -1,13 +1,734 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<!-- Add CSS at the head of HTML file -->
-    <link rel="stylesheet" href="./css/main.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Immittance Function Analyzer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        h1, h2 {
+            color: #2c3e50;
+        }
+        
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .input-panel {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .graph-container {
+            flex: 2;
+            min-width: 400px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .results-panel {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+            margin-bottom: 15px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        #clearBtn {
+            background-color: #e74c3c;
+        }
+        
+        #clearBtn:hover {
+            background-color: #c0392b;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        #graph {
+            width: 100%;
+            height: 400px;
+            border: 1px solid #ddd;
+        }
+        
+        .pole {
+            color: red;
+            font-weight: bold;
+        }
+        
+        .zero {
+            color: blue;
+            font-weight: bold;
+        }
+        
+        .intro-toggle {
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 20px 0;
+            display: block;
+            width: 100%;
+            text-align: left;
+        }
+        
+        .intro-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .intro-content.show {
+            display: block;
+        }
+    </style>
 </head>
 <body>
-		<!-- Your code goes here-->
+    <h1>Immittance Function Analyzer</h1>
+    
+    <button class="intro-toggle" id="introToggle">▼ Introduction to Immittance Functions</button>
+    <div class="intro-content" id="introContent">
+        <h2>Understanding Immittance Functions</h2>
+        <p>Immittance functions are mathematical representations used in electrical engineering to describe the relationship between voltage and current in linear time-invariant systems. The term "immittance" combines the concepts of impedance (Z) and admittance (Y), which are fundamental to circuit analysis and system design.</p>
+        
+        <h3>Key Concepts</h3>
+        <ul>
+            <li><strong>Impedance (Z):</strong> The opposition to alternating current presented by the combined effect of resistance and reactance in a circuit.</li>
+            <li><strong>Admittance (Y):</strong> The reciprocal of impedance, representing how easily a circuit allows current to flow.</li>
+            <li><strong>Poles and Zeros:</strong> Critical frequencies where the function's value becomes infinite (poles) or zero (zeros).</li>
+            <li><strong>Transfer Function:</strong> A mathematical representation of the relation between the input and output of a system.</li>
+        </ul>
+        
+        <h3>Mathematical Representation</h3>
+        <p>Immittance functions are typically represented as rational polynomial functions in the complex frequency domain (s-domain):</p>
+        <p>F(s) = N(s)/D(s) = (aₙsⁿ + aₙ₋₁sⁿ⁻¹ + ... + a₁s + a₀) / (bₘsᵐ + bₘ₋₁sᵐ⁻¹ + ... + b₁s + b₀)</p>
+        
+        <h3>Pole-Zero Analysis</h3>
+        <p>The roots of the numerator polynomial (N(s) = 0) are called zeros, while the roots of the denominator polynomial (D(s) = 0) are called poles. The locations of these poles and zeros in the complex plane determine the system's:</p>
+        <ul>
+            <li>Frequency response</li>
+            <li>Stability characteristics</li>
+            <li>Transient behavior</li>
+            <li>Resonant frequencies</li>
+        </ul>
+        
+        <h3>Applications</h3>
+        <p>Immittance function analysis is crucial in:</p>
+        <ul>
+            <li>Filter design (low-pass, high-pass, band-pass, etc.)</li>
+            <li>Control system analysis</li>
+            <li>Network synthesis</li>
+            <li>Impedance matching</li>
+            <li>Antenna design</li>
+            <li>Vibration analysis in mechanical systems</li>
+        </ul>
+        
+        <h3>Using This Tool</h3>
+        <p>This analyzer helps you visualize the pole-zero plot of immittance functions and understand their characteristics. Enter the coefficients of your numerator (zeros) and denominator (poles) polynomials, select whether you're analyzing an impedance or admittance function, and click "Analyze Function" to see the results.</p>
+    </div>
+    
+    <div class="container">
+        <div class="input-panel">
+            <h2>Function Parameters</h2>
+            <label for="functionType">Immittance Function Type:</label>
+            <select id="functionType">
+                <option value="admittance">Admittance (Y)</option>
+                <option value="impedance">Impedance (Z)</option>
+            </select>
+            
+            <label for="numerator">Numerator Coefficients (zeros):</label>
+            <input type="text" id="numerator" placeholder="e.g., 1,0,2 for s²+2" value="1,0,2">
+            
+            <label for="denominator">Denominator Coefficients (poles):</label>
+            <input type="text" id="denominator" placeholder="e.g., 1,3,2 for s²+3s+2" value="1,3,2">
+            
+            <button id="analyzeBtn">Analyze Function</button>
+            <button id="clearBtn">Clear</button>
+        </div>
+        
+        <div class="graph-container">
+            <h2>Pole-Zero Plot</h2>
+            <div id="graph"></div>
+            <div id="functionDisplay" style="margin-top: 15px; font-family: monospace; font-size: 16px;"></div>
+        </div>
+        
+        <div class="results-panel">
+            <h2>Analysis Results</h2>
+            <div id="results">
+                <p>Enter function parameters and click "Analyze Function" to see results.</p>
+            </div>
+            
+            <h3>Observation Table</h3>
+            <table id="observationTable">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Value</th>
+                        <th>Real</th>
+                        <th>Imaginary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-	<!-- Add JS at the bottom of HTML file --> 
-        <script src="./js/main.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize with default values
+            updateFunctionDisplay();
+            
+            // Set up event listeners
+            document.getElementById('analyzeBtn').addEventListener('click', analyzeFunction);
+            document.getElementById('clearBtn').addEventListener('click', clearAll);
+            document.getElementById('numerator').addEventListener('input', updateFunctionDisplay);
+            document.getElementById('denominator').addEventListener('input', updateFunctionDisplay);
+            document.getElementById('functionType').addEventListener('change', updateFunctionDisplay);
+            
+            // Intro toggle functionality
+            document.getElementById('introToggle').addEventListener('click', function() {
+                const content = document.getElementById('introContent');
+                content.classList.toggle('show');
+                this.textContent = content.classList.contains('show') ? 
+                    '▲ Hide Introduction' : '▼ Introduction to Immittance Functions';
+            });
+        });
+        
+        function updateFunctionDisplay() {
+            const numerator = document.getElementById('numerator').value;
+            const denominator = document.getElementById('denominator').value;
+            const functionType = document.getElementById('functionType').value;
+            
+            let numParts = numerator.split(',').filter(x => x.trim() !== '');
+            let denParts = denominator.split(',').filter(x => x.trim() !== '');
+            
+            let numPoly = formatPolynomial(numParts);
+            let denPoly = formatPolynomial(denParts);
+            
+            const display = document.getElementById('functionDisplay');
+            display.innerHTML = `
+                <strong>${functionType === 'admittance' ? 'Y(s) =' : 'Z(s) ='}</strong> ${numPoly} / ${denPoly}
+            `;
+        }
+        
+        function formatPolynomial(coefficients) {
+            let poly = '';
+            const degree = coefficients.length - 1;
+            
+            for (let i = 0; i < coefficients.length; i++) {
+                const coeff = parseFloat(coefficients[i]);
+                if (isNaN(coeff)) continue;
+                
+                const power = degree - i;
+                
+                if (i > 0) {
+                    poly += coeff >= 0 ? ' + ' : ' - ';
+                } else if (coeff < 0) {
+                    poly += '-';
+                }
+                
+                const absCoeff = Math.abs(coeff);
+                if (absCoeff !== 1 || power === 0) {
+                    poly += absCoeff;
+                }
+                
+                if (power > 0) {
+                    poly += 's';
+                    if (power > 1) {
+                        poly += `<sup>${power}</sup>`;
+                    }
+                }
+            }
+            
+            return poly || '0';
+        }
+        
+        function analyzeFunction() {
+            const numerator = document.getElementById('numerator').value;
+            const denominator = document.getElementById('denominator').value;
+            
+            let numCoeffs = numerator.split(',').map(x => parseFloat(x.trim())).filter(x => !isNaN(x));
+            let denCoeffs = denominator.split(',').map(x => parseFloat(x.trim())).filter(x => !isNaN(x));
+            
+            if (numCoeffs.length === 0) numCoeffs = [0];
+            if (denCoeffs.length === 0) denCoeffs = [0];
+            
+            // Find roots (zeros and poles)
+            const zeros = findRoots(numCoeffs);
+            const poles = findRoots(denCoeffs);
+            
+            // Display results
+            displayResults(zeros, poles);
+            plotPoleZero(zeros, poles);
+            updateObservationTable(zeros, poles);
+        }
+        
+        function findRoots(coefficients) {
+            // Remove leading zeros
+            while (coefficients.length > 0 && Math.abs(coefficients[0]) < 1e-10) {
+                coefficients.shift();
+            }
+            
+            if (coefficients.length === 0) return [];
+            
+            // For quadratic or lower, use analytical solutions
+            if (coefficients.length <= 3) {
+                return solvePolynomial(...coefficients);
+            }
+            
+            // For higher order, use Durand-Kerner method
+            return durandKerner(coefficients);
+        }
+        
+        function solvePolynomial(a = 0, b = 0, c = 0) {
+            if (Math.abs(a) < 1e-10) {
+                if (Math.abs(b) < 1e-10) {
+                    return []; // Constant function
+                }
+                return [-c / b]; // Linear
+            }
+            
+            // Quadratic
+            const discriminant = b * b - 4 * a * c;
+            
+            if (discriminant > 0) {
+                const sqrtDisc = Math.sqrt(discriminant);
+                return [(-b + sqrtDisc) / (2 * a), (-b - sqrtDisc) / (2 * a)];
+            } else if (Math.abs(discriminant) < 1e-10) {
+                return [-b / (2 * a)]; // Repeated real root
+            } else {
+                const sqrtDisc = Math.sqrt(-discriminant);
+                const real = -b / (2 * a);
+                const imag = sqrtDisc / (2 * a);
+                return [{real, imag}, {real, imag: -imag}];
+            }
+        }
+        
+        function durandKerner(coefficients, maxIterations = 100, tolerance = 1e-10) {
+            const n = coefficients.length - 1;
+            if (n === 0) return [];
+            
+            // Initial guesses (unit circle)
+            let roots = [];
+            const angleIncrement = (2 * Math.PI) / n;
+            for (let i = 0; i < n; i++) {
+                const angle = i * angleIncrement;
+                roots.push({
+                    real: 0.5 * Math.cos(angle),
+                    imag: 0.5 * Math.sin(angle)
+                });
+            }
+            
+            for (let iter = 0; iter < maxIterations; iter++) {
+                let maxDiff = 0;
+                let newRoots = [];
+                
+                for (let i = 0; i < n; i++) {
+                    const currentRoot = roots[i];
+                    let numerator = evaluatePolynomial(coefficients, currentRoot);
+                    let denominator = 1;
+                    
+                    for (let j = 0; j < n; j++) {
+                        if (i !== j) {
+                            const diff = complexSubtract(currentRoot, roots[j]);
+                            denominator = complexMultiply(denominator, diff);
+                        }
+                    }
+                    
+                    const correction = complexDivide(numerator, denominator);
+                    const newRoot = complexSubtract(currentRoot, correction);
+                    newRoots.push(newRoot);
+                    
+                    const diff = complexAbs(correction);
+                    if (diff > maxDiff) maxDiff = diff;
+                }
+                
+                roots = newRoots;
+                if (maxDiff < tolerance) break;
+            }
+            
+            return roots;
+        }
+        
+        function evaluatePolynomial(coefficients, x) {
+            let result = {real: 0, imag: 0};
+            const degree = coefficients.length - 1;
+            
+            for (let i = 0; i <= degree; i++) {
+                const term = complexPow(x, degree - i);
+                const scaledTerm = complexScale(term, coefficients[i]);
+                result = complexAdd(result, scaledTerm);
+            }
+            
+            return result;
+        }
+        
+        function complexAdd(a, b) {
+            return {
+                real: a.real + b.real,
+                imag: a.imag + b.imag
+            };
+        }
+        
+        function complexSubtract(a, b) {
+            return {
+                real: a.real - b.real,
+                imag: a.imag - b.imag
+            };
+        }
+        
+        function complexMultiply(a, b) {
+            return {
+                real: a.real * b.real - a.imag * b.imag,
+                imag: a.real * b.imag + a.imag * b.real
+            };
+        }
+        
+        function complexDivide(a, b) {
+            const denominator = b.real * b.real + b.imag * b.imag;
+            return {
+                real: (a.real * b.real + a.imag * b.imag) / denominator,
+                imag: (a.imag * b.real - a.real * b.imag) / denominator
+            };
+        }
+        
+        function complexScale(a, scalar) {
+            return {
+                real: a.real * scalar,
+                imag: a.imag * scalar
+            };
+        }
+        
+        function complexPow(z, n) {
+            if (n === 0) return {real: 1, imag: 0};
+            if (n === 1) return z;
+            
+            let result = {real: 1, imag: 0};
+            for (let i = 0; i < n; i++) {
+                result = complexMultiply(result, z);
+            }
+            return result;
+        }
+        
+        function complexAbs(z) {
+            return Math.sqrt(z.real * z.real + z.imag * z.imag);
+        }
+        
+        function displayResults(zeros, poles) {
+            const resultsDiv = document.getElementById('results');
+            const functionType = document.getElementById('functionType').value;
+            
+            let html = `<h3>${functionType === 'admittance' ? 'Admittance' : 'Impedance'} Function Analysis</h3>`;
+            
+            html += `<p><strong>Zeros:</strong> ${formatComplexArray(zeros)}</p>`;
+            html += `<p><strong>Poles:</strong> ${formatComplexArray(poles)}</p>`;
+            
+            // Stability analysis (for impedance/admittance functions)
+            const unstablePoles = poles.filter(p => {
+                if (typeof p === 'number') return p > 0;
+                return p.real > 0;
+            });
+            
+            if (unstablePoles.length > 0) {
+                html += `<p class="pole"><strong>System is unstable</strong> (has poles in right half-plane)</p>`;
+            } else {
+                html += `<p class="zero"><strong>System is stable</strong> (all poles in left half-plane)</p>`;
+            }
+            
+            resultsDiv.innerHTML = html;
+        }
+        
+        function formatComplexArray(values) {
+            if (values.length === 0) return 'None';
+            
+            return values.map(v => {
+                if (typeof v === 'number') {
+                    return v.toFixed(4);
+                } else {
+                    if (Math.abs(v.imag) < 1e-10) {
+                        return v.real.toFixed(4);
+                    } else if (Math.abs(v.real) < 1e-10) {
+                        return (v.imag >= 0 ? '' : '-') + Math.abs(v.imag).toFixed(4) + 'i';
+                    } else {
+                        return v.real.toFixed(4) + (v.imag >= 0 ? ' + ' : ' - ') + Math.abs(v.imag).toFixed(4) + 'i';
+                    }
+                }
+            }).join(', ');
+        }
+        
+        function plotPoleZero(zeros, poles) {
+            // Prepare data for Plotly
+            const zeroReal = [];
+            const zeroImag = [];
+            const poleReal = [];
+            const poleImag = [];
+            
+            // Process zeros
+            zeros.forEach(z => {
+                if (typeof z === 'number') {
+                    zeroReal.push(z);
+                    zeroImag.push(0);
+                } else {
+                    zeroReal.push(z.real);
+                    zeroImag.push(z.imag);
+                }
+            });
+            
+            // Process poles
+            poles.forEach(p => {
+                if (typeof p === 'number') {
+                    poleReal.push(p);
+                    poleImag.push(0);
+                } else {
+                    poleReal.push(p.real);
+                    poleImag.push(p.imag);
+                }
+            });
+            
+            // Create traces
+            const zeroTrace = {
+                x: zeroReal,
+                y: zeroImag,
+                mode: 'markers',
+                type: 'scatter',
+                name: 'Zeros',
+                marker: {
+                    symbol: 'circle-open',
+                    size: 10,
+                    color: 'blue',
+                    line: {
+                        width: 2
+                    }
+                }
+            };
+            
+            const poleTrace = {
+                x: poleReal,
+                y: poleImag,
+                mode: 'markers',
+                type: 'scatter',
+                name: 'Poles',
+                marker: {
+                    symbol: 'x',
+                    size: 10,
+                    color: 'red',
+                    line: {
+                        width: 2
+                    }
+                }
+            };
+            
+            // Unit circle for reference
+            const circlePoints = 100;
+            const circleReal = [];
+            const circleImag = [];
+            for (let i = 0; i <= circlePoints; i++) {
+                const angle = (2 * Math.PI * i) / circlePoints;
+                circleReal.push(Math.cos(angle));
+                circleImag.push(Math.sin(angle));
+            }
+            
+            const circleTrace = {
+                x: circleReal,
+                y: circleImag,
+                mode: 'lines',
+                type: 'scatter',
+                name: 'Unit Circle',
+                line: {
+                    color: 'gray',
+                    dash: 'dot',
+                    width: 1
+                },
+                showlegend: false
+            };
+            
+            // Axes lines
+            const xAxisTrace = {
+                x: [-2, 2],
+                y: [0, 0],
+                mode: 'lines',
+                type: 'scatter',
+                line: {
+                    color: 'black',
+                    width: 1
+                },
+                showlegend: false
+            };
+            
+            const yAxisTrace = {
+                x: [0, 0],
+                y: [-2, 2],
+                mode: 'lines',
+                type: 'scatter',
+                line: {
+                    color: 'black',
+                    width: 1
+                },
+                showlegend: false
+            };
+            
+            const layout = {
+                title: 'Pole-Zero Plot',
+                xaxis: {
+                    title: 'Real',
+                    range: [-2, 2]
+                },
+                yaxis: {
+                    title: 'Imaginary',
+                    scaleanchor: 'x',
+                    range: [-2, 2]
+                },
+                margin: {
+                    l: 50,
+                    r: 50,
+                    b: 50,
+                    t: 50,
+                    pad: 4
+                },
+                showlegend: true,
+                legend: {
+                    orientation: 'h',
+                    y: 1.1
+                }
+            };
+            
+            Plotly.newPlot('graph', [zeroTrace, poleTrace, circleTrace, xAxisTrace, yAxisTrace], layout);
+        }
+        
+        function updateObservationTable(zeros, poles) {
+            const tableBody = document.querySelector('#observationTable tbody');
+            tableBody.innerHTML = '';
+            
+            // Add zeros to table
+            zeros.forEach(z => {
+                const row = document.createElement('tr');
+                
+                if (typeof z === 'number') {
+                    row.innerHTML = `
+                        <td>Zero</td>
+                        <td>${z.toFixed(4)}</td>
+                        <td>${z.toFixed(4)}</td>
+                        <td>0</td>
+                    `;
+                } else {
+                    row.innerHTML = `
+                        <td>Zero</td>
+                        <td>${z.real.toFixed(4)} ${z.imag >= 0 ? '+' : '-'} ${Math.abs(z.imag).toFixed(4)}i</td>
+                        <td>${z.real.toFixed(4)}</td>
+                        <td>${z.imag.toFixed(4)}</td>
+                    `;
+                }
+                
+                tableBody.appendChild(row);
+            });
+            
+            // Add poles to table
+            poles.forEach(p => {
+                const row = document.createElement('tr');
+                
+                if (typeof p === 'number') {
+                    row.innerHTML = `
+                        <td>Pole</td>
+                        <td>${p.toFixed(4)}</td>
+                        <td>${p.toFixed(4)}</td>
+                        <td>0</td>
+                    `;
+                } else {
+                    row.innerHTML = `
+                        <td>Pole</td>
+                        <td>${p.real.toFixed(4)} ${p.imag >= 0 ? '+' : '-'} ${Math.abs(p.imag).toFixed(4)}i</td>
+                        <td>${p.real.toFixed(4)}</td>
+                        <td>${p.imag.toFixed(4)}</td>
+                    `;
+                }
+                
+                tableBody.appendChild(row);
+            });
+        }
+        
+        function clearAll() {
+            document.getElementById('numerator').value = '1,0,2';
+            document.getElementById('denominator').value = '1,3,2';
+            document.getElementById('results').innerHTML = '<p>Enter function parameters and click "Analyze Function" to see results.</p>';
+            document.querySelector('#observationTable tbody').innerHTML = '';
+            updateFunctionDisplay();
+            Plotly.purge('graph');
+        }
+    </script>
 </body>
 </html>

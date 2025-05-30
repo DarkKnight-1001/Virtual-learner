@@ -1,1 +1,1 @@
-### Aim of the experiment
+### To find poles and zeroes of immittance function with user interface.
