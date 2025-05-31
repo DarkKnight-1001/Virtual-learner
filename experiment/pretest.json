@@ -30,6 +30,51 @@
       },
       "correctAnswer": "c",
       "difficulty": "beginner"
+    },
+     {
+      "question": "What is an immittance function in electrical network analysis?",
+      "answers": {
+        "a": "The ratio of voltage to power ",
+        "b": "The ratio of impedance to admittance",
+        "c": " Either impedance or admittance function of a network",
+        "d": "The sum of impedance and admittance"
+      },
+      "explanations": {
+        
+        "c":": Immittance is a general term that refers to either impedance (Z) or admittance (Y)."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+     {
+      "question": "poles of an immittance function are associated with",
+      "answers": {
+        "a": " Transmission zeros ",
+        "b": "Natural frequencies or resonances of the system",
+        "c": "Energy loss points",
+        "d": "Points where the function is zero"
+      },
+      "explanations": {
+        
+        "b":" Poles are values of frequency where the function goes to infinity—this happens at natural frequencies where the system resonates."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+     {
+      "question": "The zeroes of an immittance function occur at:",
+      "answers": {
+        "a": " Points where the function goes to infinity",
+        "b": "Frequencies where output is maximum",
+        "c": "Frequencies where the function value is zero ",
+        "d": "Points where the phase angle is 180 degrees"
+      },
+      "explanations": {
+        
+        "c":"A zero of a function is a frequency where the value of the function becomes zero"
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
     }
   ]
 }

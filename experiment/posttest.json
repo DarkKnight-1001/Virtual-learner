@@ -30,6 +30,66 @@
       },
       "correctAnswer": "b",
       "difficulty": "beginner"
+    },
+      {
+      "question": "In terms of complex frequency s, poles of an immittance function occur at:",
+      "answers": {
+        "a": "Where the numerator is zero ",
+        "b": "Where the denominator is zero",
+        "c": "Where both numerator and denominator are zero",
+        "d": "Where the function is constant"
+      },
+      "explanations": {
+        
+        "b":"In a rational function, poles occur where the denominator becomes zero."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+       {
+      "question": "Which is not a property of a physically realizable immittance function?",
+      "answers": {
+        "a": " Poles/zeroes in left half-plane ",
+        "b": "Rational function",
+        "c": "Positive real function",
+        "d": "Poles in right half-plane"
+      },
+      "explanations": {
+        
+        "d":"For stability, poles must lie in the left half of the s-plane. Right half-plane poles mean instability."
+      },
+      "correctAnswer": "d",
+      "difficulty": "beginner"
+    },
+     {
+      "question": " In a driving-point impedance function, a pole at the origin implies:",
+      "answers": {
+        "a": "Capacitive element ",
+        "b": "Resistive element",
+        "c": "inductive element ",
+        "d": "Short circuit"
+      },
+      "explanations": {
+        
+        "c":"A pole at s=0 indicates a 1/s term in impedance, which corresponds to an inductor (L)"
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+     {
+      "question": "For a network to be passive and stable, its immittance function must have:",
+      "answers": {
+        "a": " Poles in right half-plane",
+        "b": " No zeroes",
+        "c": "Positive real characteristics",
+        "d": "Only imaginary poles"
+      },
+      "explanations": {
+        
+        "c":"A Positive Real (PR) function has properties that ensure passivity and stability in electrical networks."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
     }
   ]
 }
