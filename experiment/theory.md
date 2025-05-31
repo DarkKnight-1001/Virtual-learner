@@ -97,7 +97,7 @@ N
  (s)
 ​
  
-📗 2. Theory of Immittance Functions
+## 📗 2. Theory of Immittance Functions
 For a function to be a valid immittance function of a passive, linear, and time-invariant network:
 
 2.1 Positive Real Functions (PRF)
@@ -157,7 +157,7 @@ F(s) lie in the left-half of the complex plane (or on the jω-axis but simple an
 2.2 Rationality
 The function must be rational, i.e., it can be expressed as the ratio of two polynomials with real coefficients.
 
-📙 3. Finding Poles and Zeros
+## 📙 3. Finding Poles and Zeros
 3.1 Definitions
 Given:
 
@@ -278,7 +278,7 @@ s where
 ∞
 Z(s)→∞
 
-📘 4. Example
+## 📘 4. Example
 Example Immittance Function:
 𝑍
 (
@@ -308,7 +308,7 @@ s
  +3s+2
 ​
  
-Step-by-Step: Find Poles and Zeros
+## Step-by-Step: Find Poles and Zeros
 Step 1: Factor Numerator and Denominator
 Numerator (zeros):
 
@@ -388,8 +388,10 @@ s
 2
  +2 
 2
+
  ⇒Poles at s=−1±j2
-📕 5. Properties of Poles and Zeros in Immittance Functions
+ 
+## 📕 5. Properties of Poles and Zeros in Immittance Functions
 Realizability: For a network to be passive, all poles must be in the left-half s-plane.
 
 Complex poles/zeros must occur in conjugate pairs to preserve real-valued time-domain functions.
@@ -398,7 +400,7 @@ Stability: Requires all poles to lie in the left-half of the s-plane.
 
 Causality: Ensures that the degree of the numerator ≤ degree of denominator.
 
-🛠 6. General Procedure to Analyze an Immittance Function
+## 🛠 6. General Procedure to Analyze an Immittance Function
 Identify the type (Z or Y).
 
 Write in rational form.
@@ -411,7 +413,7 @@ Verify Positive Real condition (if checking passivity).
 
 Plot on s-plane (optional but helpful).
 
-✍️ 7. Example of a Y(s) Admittance Function
+## ✍️ 7. Example of a Y(s) Admittance Function
 𝑌
 (
 𝑠
@@ -463,6 +465,3 @@ s
 2
  +4s+13=0⇒s=−2±j3
 
-### https://www.eeeguide.com/lc-immittance-function/#google_vignette
-### https://en.wikipedia.org/wiki/Zeros_and_poles
-### https://en.wikipedia.org/wiki/Pole%E2%80%93zero_plot
