@@ -47,7 +47,7 @@ Where:
 
 ## **3. General Procedure for Finding Poles and Zeroes**
 
-### ### 🔹 Step 1: Determine the Type of Immittance Function
+ ### 🔹 Step 1: Determine the Type of Immittance Function
 
 Identify whether the function is:
 
@@ -58,7 +58,7 @@ This identification is important because it influences how you model the element
 
 ---
 
-### ### 🔹 Step 2: Convert Circuit Elements into Laplace Domain
+ ### 🔹 Step 2: Convert Circuit Elements into Laplace Domain
 
 In the Laplace domain, reactive elements are represented as functions of $s$:
 
@@ -72,7 +72,7 @@ Thus, convert the entire circuit using these transformations.
 
 ---
 
-### ### 🔹 Step 3: Model the Circuit
+ ### 🔹 Step 3: Model the Circuit
 
 Using standard analysis techniques:
 
@@ -96,7 +96,7 @@ Make sure you simplify all combinations:
 
 ---
 
-### ### 🔹 Step 4: Express the Function as a Rational Function
+ ### 🔹 Step 4: Express the Function as a Rational Function
 
 Simplify the function into a ratio of two polynomials.
 
@@ -107,7 +107,7 @@ Ensure that:
 
 ---
 
-### ### 🔹 Step 5: Find the Zeroes (Roots of Numerator)
+ ### 🔹 Step 5: Find the Zeroes (Roots of Numerator)
 
 To find the zeroes:
 
@@ -126,7 +126,7 @@ To find the zeroes:
 
 ---
 
-### ### 🔹 Step 6: Find the Poles (Roots of Denominator)
+ ### 🔹 Step 6: Find the Poles (Roots of Denominator)
 
 To find the poles:
 
@@ -141,8 +141,7 @@ To find the poles:
 These indicate the natural frequencies (and potential instabilities) of the system.
 
 ---
-
-### ### 🔹 Step 7: Plot Poles and Zeroes in the s-plane
+ ### 🔹 Step 7: Plot Poles and Zeroes in the s-plane
 
 Plot the locations of poles and zeroes on the complex $s$-plane:
 
